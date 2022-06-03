@@ -1,7 +1,8 @@
-# Reinforcement Learning Project
+# Multi Environment Reinforcement Learning Project
+
 ## Table of Contents
 - [Overview](#Overview)
-- [Setup](#Setup)
+- [Usage](#Usage)
 - [Training](#Training)
 - [Evaluation](#Evaluation)
 - [Reuirements](#Requirements)
@@ -10,118 +11,132 @@
 	- [Implementing Grid Search](#Implementing-Grid-Search)
 
 ## Overview
-This task aims to learn how to deal with Reinforcement Learning regarding [this reference.](https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/ "this reference")
-In addition to that, it's required to do the following tasks:
+In this project, we are dealing with multiple environments from the gym library and trying to apply Reinforcement Learning to optimize the agent actions.
+
+The project divided into three parts:
 
 1) Turn this code into a module of functions that can use multiple environments.
-
 2) Tune alpha, gamma, and/or epsilon using a decay over episodes.
-
 3) Implement a grid search to discover the best hyperparameters.
 
-## Setup
-First, It's needed to install the following libraries while dealing with **Windows OS**:
-
+## Usage
+We are using some libraries in the code that should be installed at the beginning by runing those commands:
 ```python
-!py -m pip install cmake "gym[atari]" scipy
-!py -m pip install gym[atari]
-!pip install gym[toy_text]
-!pip install gym[accept-rom-license]
-!pip install ale-py
+!pip install cmake 'gym[atari]' scipy
+!pip install gym[atari]
+!pip install autorom[accept-rom-license]
+!pip install gym[atari,accept-rom-license]==0.21.0
 ```
-Furthermore, It's needed to import some important libraries:
+Then import them as shown:
 ```python
 import gym
-from IPython.display import clear_output
-from ale_py import ALEInterface
-import numpy as np
 import random
+import numpy as np
 from time import sleep
+import matplotlib.pyplot as plt
+from IPython.display import clear_output
 ```
-## Training
-To begin with, we implemented a function to setup the environment by providing its name and it returns an object of this environment.
 
+## Training and Evaluation
+All you need to train and Evaluate the model on an environment just pass the environment's name to the train model function.
+```python
+env_name = 'Taxi-v3'
+frames, AVG_timesteps, AVG_penalities = train_model(env_name)
+print(f"Average timesteps per episode: {AVG_timesteps}")
+print(f"Average penalties per episode: {AVG_penalities}")
+Episode: 100000
+Training finished.
 
-In this module we also used the function that implemented in the mentioned reference to generate the Q-table.
+"""" The output:
+alpha=  0.08320525979643727  gamma=  0.2667009922469463  epsilon=  0.3104866231676667
+Results after 100 episodes:
+Average timesteps per episode: 20.88
+Average penalties per episode: 0.0
+""""
+```
 
-## Evaluation
-In this module, we implemented a function to evaluate the model by providing its object and the Q-table that generated from training to get the penalty score and the timesteps.
-In addition, it returns the frames of the episodes to be plotted in the print_frame function.
-
-![image](https://drive.google.com/uc?export=view&id=1SAGJhRIubr56DsjzGAwjmUk0ufTKL-RB)
 
 ## Requirements
-### Module of Functions
-It's required to generalize the functions above to be used on diverse environments, so we implemented a function called model_setup that takes the name of a certain environment and some other parameters such as (alpha, gamma and epsilon). On the other hand, it returns the list of frames to be plotted, the average timestep per episode and the average penalty.
+### The Project Modules
+it's easier to work with modularized code, as it's simple to use as shown:
 ```python
-# "Taxi-v3" Environment
-frames,average_timesteps,average_penalties = model_setup(name_="Taxi-v3",alpha=0.1,gamma=0.6,epsilon=0.1)
-
-##########################################
-#	Episode: 100000									  
-#	Training finished.										
-#																 
-#	Results after 100 episodes:					 
-#	Average timesteps per episode: 12.98	
-#	Average penalties per episode: 0.0		  
-##########################################
+# Specify the game required
+env_name = 'Taxi-v3'
+# Return the game envirment as an object
+env = get_env(env_name)
+# Build the Q-Table just specify the learning parameters
+q_table=q_table_train(env,alpha =.1,gamma = .6,epsilon = .9)
+# Evaluate the model by returning the time and penalties
+frames, AVG_timesteps, AVG_penalities= model_evaluate(env, q_table)
+# Visualize the game frame by frame
+print_frames(frames)
+# print the model Average timesteps and Average penalties
+print(f"Average timesteps per episode: {AVG_timesteps}")
+print(f"Average penalties per episode: {AVG_penalities}")
 ```
-![image](https://drive.google.com/uc?export=view&id=1SAGJhRIubr56DsjzGAwjmUk0ufTKL-RB)
+images:
 
-```python
-# "FrozenLake-v1" Environment
-frames,average_timesteps,average_penalties = model_setup(name_="FrozenLake-v1",alpha=0.1,gamma=0.6,epsilon=0.1)
 
-##########################################
-#	Episode: 100000
-#	Training finished.
-#
-#	Results after 100 episodes:
-#	Average timesteps per episode: 9.42
-#	Average penalties per episode: 0.0 
-##########################################
-```
-![image](https://drive.google.com/uc?export=view&id=1-P6mp5yB1OZEthwey6Kknp2drFCv_0EP)
-
-```python
-# "CliffWalking-v1" Environment
-frames,average_timesteps,average_penalties = model_setup(name_="CliffWalking-v0",alpha=0.1,gamma=0.6,epsilon=0.1)
-
-##########################################
-#	Episode: 100000
-#	Training finished.
-#
-#	Results after 100 episodes:
-#	Average timesteps per episode: 13.0
-#	Average penalties per episode: 0.0 
-##########################################
-```
-![image](https://drive.google.com/uc?export=view&id=1SCjhiUbozjE3I2R6bKWx9uoj2z9fsslo)
 
 ## Tuning using decay over episodes
-It's required to change the hyperparameters while training, so we changed the hyperparameters each quarter of episodes.
-- Decreasing the alpha by 0.05
-- Decreasing the epsilon by 0.1
-- Increasing the gamma by 0.1
+Also, built a function to train and evaluate the model using the decay over episodes technique using this equation: **parameter = parameter\*(1-parameter \* decay_factor)**
+```Python
+# The hyperparameter
+alpha = 0.1
+gamma = 0.9
+epsilon = 0.9
+# Apply the decay over technique with decay factor .1
+decay_over = True
+decay_factor= .1
+
+env_name = 'Taxi-v3'
+frames, AVG_timesteps, AVG_penalities = train_model(env_name, alpha_para = alpha, gamma_para =gamma, epsilon_para = epsilon,decay_over=decay_over,decay_factor=decay_factor)
+print(f"Average timesteps per episode: {AVG_timesteps}")
+print(f"Average penalties per episode: {AVG_penalities}")
+
+""""Output
+Episode: 100000
+Training finished.
+ alpha=  0.08320525979643727  gamma=  0.2667009922469463  epsilon=  0.3104866231676667
+Results after 100 episodes:
+Average timesteps per episode: 20.88
+Average penalties per episode: 0.0
+""""
+```
+
 
 ## Implementing Grid Search
 It's required to implement Grid Search to find the best combinations of hyper parameters values to get the minimum penalty and minimum steptime.
 ```python
-parameters = {'alpha': [0.3,0.2,0.1],'gamma':[0.3,0.2,0.1],'epsilon':[0.4,0.3,0.2]}
-best_params = Grid_search(env_name="Taxi-v3",param=parameters)
-best_params
+env_name = "Taxi-v3"
+params = {'alpha':[0.9,0.6,0.3],'gamma':[0.9,0.6,0.3],'epsilon':[0.9,0.6,0.3]} #[0.9,0.6,0.3]
+best_params1, best_AVGtime1 ,best_AVGpenalties1, best_frame1 = grid_search(env_name=env_name,parameters=params,decay_over=False,decay_factor=.1)
+print('Best_parameters:', best_params1)
+print('Average timesteps per episode:', best_AVGtime1)
+print('Average penalties per episode:', best_AVGpenalties1)
 
-#Best parameters are: {'alpha': 0.2, 'gamma': 0.2, 'epsilon': 0.2, 'penalty': 0.0, 'time step': 12.65}
 
-frames,average_timesteps,average_penalties = model_setup(name_="Taxi-v3",alpha=0.2,gamma=0.2,epsilon=0.2)
+"""
+Best_parameters: {'alpha': 0.6, 'gamma': 0.3, 'epsilon': 0.9}
+Average timesteps per episode: 5.71
+Average penalties per episode: 0.0
+"""
 
-##########################################
-#	Episode: 100000
-#	Training finished.
-#
-#	Results after 100 episodes:
-#	Average timesteps per episode: 12.67
-#	Average penalties per episode: 0.0 
-##########################################
+```
+
+```python
+env_name = "FrozenLake-v1"
+params = {'alpha':[0.9,0.6,0.3],'gamma':[0.9,0.6,0.3],'epsilon':[0.9,0.6,0.3]} #[0.9,0.6,0.3]
+best_params1, best_AVGtime1 ,best_AVGpenalties1, best_frame1 = grid_search(env_name=env_name,parameters=params,decay_over=False,decay_factor=.1)
+print('Best_parameters:', best_params1)
+print('Average timesteps per episode:', best_AVGtime1)
+print('Average penalties per episode:', best_AVGpenalties1)
+
+
+"""
+Best_parameters: {'alpha': 0.6, 'gamma': 0.3, 'epsilon': 0.9}
+Average timesteps per episode: 5.71
+Average penalties per episode: 0.0
+"""
 
 ```
