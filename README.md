@@ -59,6 +59,7 @@ Average penalties per episode: 0.0
 ## Requirements
 ### The Project Modules
 it's easier to work with modularized code, as it's simple to use as shown:
+#### Taxi-V3
 ```python
 # Specify the game required
 env_name = 'Taxi-v3'
@@ -74,8 +75,26 @@ print_frames(frames)
 print(f"Average timesteps per episode: {AVG_timesteps}")
 print(f"Average penalties per episode: {AVG_penalities}")
 ```
-images:
-![image](https://drive.google.com/file/d/1Fm7yM5W32CfrSZSCvIGdqrAytuY4Ocpb/view?usp=sharing)
+![image](https://drive.google.com/uc?export=view&id=1JbugSE2wC18DotytdMyA4Pmr1Q55OOSD)
+
+#### FrozenLake-v1
+```python
+# Specify the game required
+env_name = 'Taxi-v3'
+# Return the game envirment as an object
+env = get_env(env_name)
+# Build the Q-Table just specify the learning parameters
+q_table=q_table_train(env,alpha =.1,gamma = .6,epsilon = .9)
+# Evaluate the model by returning the time and penalties
+frames, AVG_timesteps, AVG_penalities= model_evaluate(env, q_table)
+# Visualize the game frame by frame
+print_frames(frames)
+# print the model Average timesteps and Average penalties
+print(f"Average timesteps per episode: {AVG_timesteps}")
+print(f"Average penalties per episode: {AVG_penalities}")
+```
+
+![image](https://drive.google.com/uc?export=view&id=1Fm7yM5W32CfrSZSCvIGdqrAytuY4Ocpb)
 
 
 ## Tuning using decay over episodes
