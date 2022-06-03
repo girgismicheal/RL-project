@@ -3,7 +3,7 @@
 ## Table of Contents
 - [Overview](#Overview)
 - [Usage](#Usage)
-- [Train and Evaluate The Model](#Train and Evaluate The Model)
+- [Train](#Train)
 - [Reuirements](#Requirements)
 	- [Module of Functions](#Module-of-Functions)
 	- [Tuning using decay over episodes](#Tuning-using-decay-over-episodes)
