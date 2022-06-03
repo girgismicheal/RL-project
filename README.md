@@ -153,8 +153,8 @@ print('Average penalties per episode:', best_AVGpenalties1)
 
 
 """
-Best_parameters: {'alpha': 0.6, 'gamma': 0.3, 'epsilon': 0.9}
-Average timesteps per episode: 5.71
+Best_parameters: {'alpha': 0.9, 'gamma': 0.9, 'epsilon': 0.3}
+Average timesteps per episode: 186.62
 Average penalties per episode: 0.0
 """
 
