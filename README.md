@@ -3,8 +3,7 @@
 ## Table of Contents
 - [Overview](#Overview)
 - [Usage](#Usage)
-- [Training](#Training)
-- [Evaluation](#Evaluation)
+- [Train and Evaluate The Model](#Train and Evaluate The Model)
 - [Reuirements](#Requirements)
 	- [Module of Functions](#Module-of-Functions)
 	- [Tuning using decay over episodes](#Tuning-using-decay-over-episodes)
@@ -37,7 +36,7 @@ import matplotlib.pyplot as plt
 from IPython.display import clear_output
 ```
 
-## Training and Evaluation
+## Train and Evaluate The Model
 All you need to train and Evaluate the model on an environment just pass the environment's name to the train model function.
 ```python
 env_name = 'Taxi-v3'
