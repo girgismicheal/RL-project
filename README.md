@@ -14,7 +14,7 @@ In this project, we are dealing with multiple environments from the gym library 
 
 The project divided into three parts:
 
-1) Turn this code into a module of functions that can use multiple environments.
+1) Turn the code into a module of functions that can use with multiple environments.
 2) Tune alpha, gamma, and/or epsilon using a decay over episodes.
 3) Implement a grid search to discover the best hyperparameters.
 
