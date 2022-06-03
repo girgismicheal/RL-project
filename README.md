@@ -75,7 +75,7 @@ print(f"Average timesteps per episode: {AVG_timesteps}")
 print(f"Average penalties per episode: {AVG_penalities}")
 ```
 images:
-
+![image](https://drive.google.com/file/d/1Fm7yM5W32CfrSZSCvIGdqrAytuY4Ocpb/view?usp=sharing)
 
 
 ## Tuning using decay over episodes
