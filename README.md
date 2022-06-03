@@ -80,7 +80,7 @@ print(f"Average penalties per episode: {AVG_penalities}")
 #### FrozenLake-v1
 ```python
 # Specify the game required
-env_name = 'Taxi-v3'
+env_name = 'FrozenLake-v1'
 # Return the game envirment as an object
 env = get_env(env_name)
 # Build the Q-Table just specify the learning parameters
