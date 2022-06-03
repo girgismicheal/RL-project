@@ -43,10 +43,11 @@ env_name = 'Taxi-v3'
 frames, AVG_timesteps, AVG_penalities = train_model(env_name)
 print(f"Average timesteps per episode: {AVG_timesteps}")
 print(f"Average penalties per episode: {AVG_penalities}")
-Episode: 100000
-Training finished.
+
 
 """" The output:
+Episode: 100000
+Training finished.
 alpha=  0.08320525979643727  gamma=  0.2667009922469463  epsilon=  0.3104866231676667
 Results after 100 episodes:
 Average timesteps per episode: 20.88
