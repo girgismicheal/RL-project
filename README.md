@@ -5,7 +5,7 @@
 - [Usage](#Usage)
 - [Train and Evaluate](#Train-and-Evaluate)
 - [Reuirements](#Requirements)
-	- [Module of Functions](#Module-of-Functions)
+	- [Module of Functions](#Project-Moduless)
 	- [Tuning using decay over episodes](#Tuning-the-Parameters-using-Decay-Over-Episodes-Technique)
 	- [Implementing Grid Search](#Implementing-Grid-Search)
 
@@ -56,7 +56,7 @@ Average penalties per episode: 0.0
 
 
 ## Requirements
-### The Project Modules
+### Project Modules
 it's easier to work with modularized code, as it's simple to use as shown:
 #### Taxi-V3
 ```python
