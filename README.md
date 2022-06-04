@@ -96,7 +96,7 @@ print(f"Average penalties per episode: {AVG_penalities}")
 ![image](https://drive.google.com/uc?export=view&id=1Fm7yM5W32CfrSZSCvIGdqrAytuY4Ocpb)
 
 
-## Tuning using decay over episodes
+## Tuning the Parameters using Decay Over Episodes Technique
 Also, built a function to train and evaluate the model using the decay over episodes technique using this equation: **parameter = parameter\*(1-parameter \* decay_factor)**
 ```Python
 # The hyperparameter
@@ -119,6 +119,14 @@ Average penalties per episode: 0.0
 """"
 ```
 ```python
+# The hyperparameter
+alpha = 0.1
+gamma = 0.9
+epsilon = 0.9
+# Apply the decay over technique with decay factor .1
+decay_over = True
+decay_factor= .1
+
 env_name = 'FrozenLake-v1'
 frames,AVG_timesteps, AVG_penalities = train_model(env_name, alpha_para = 0.1, gamma_para = 0.6, epsilon_para = 0.9,decay_over=True,decay_factor=.1)
 print(f"Average timesteps per episode: {AVG_timesteps}")
@@ -131,7 +139,7 @@ Average penalties per episode: 0.0
 """"
 ```
 
-## Implementing Grid Search
+## Implementing the Grid Search
 It's required to implement Grid Search to find the best combinations of hyper parameters values to get the minimum penalty and minimum steptime.
 ```python
 env_name = "Taxi-v3"
