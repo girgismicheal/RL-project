@@ -3,10 +3,10 @@
 ## Table of Contents
 - [Overview](#Overview)
 - [Usage](#Usage)
-- [Train and Evaluate](#Train_and_Evaluate)
+- [Train and Evaluate](#Train-and-Evaluate)
 - [Reuirements](#Requirements)
 	- [Module of Functions](#Module-of-Functions)
-	- [Tuning using decay over episodes](#Tuning-using-decay-over-episodes)
+	- [Tuning using decay over episodes](#Tuning-the-Parameters-using-Decay-Over-Episodes-Technique)
 	- [Implementing Grid Search](#Implementing-Grid-Search)
 
 ## Overview
@@ -36,7 +36,7 @@ import matplotlib.pyplot as plt
 from IPython.display import clear_output
 ```
 
-## Train_and_Evaluate
+## Train and Evaluate
 All you need to train and Evaluate the model on an environment just pass the environment's name to the train model function.
 ```python
 env_name = 'Taxi-v3'
@@ -139,7 +139,7 @@ Average penalties per episode: 0.0
 """"
 ```
 
-## Implementing the Grid Search
+## Implementing Grid Search
 It's required to implement Grid Search to find the best combinations of hyper parameters values to get the minimum penalty and minimum steptime.
 ```python
 env_name = "Taxi-v3"
