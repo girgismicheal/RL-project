@@ -36,7 +36,7 @@ import matplotlib.pyplot as plt
 from IPython.display import clear_output
 ```
 
-## Train_and_Evaluate
+## Train and Evaluate
 All you need to train and Evaluate the model on an environment just pass the environment's name to the train model function.
 ```python
 env_name = 'Taxi-v3'
