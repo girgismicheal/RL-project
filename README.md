@@ -5,7 +5,7 @@
 - [Usage](#Usage)
 - [Train and Evaluate](#Train-and-Evaluate)
 - [Reuirements](#Requirements)
-	- [Project Modules](#Project-Moduless)
+	- [Project Modules](#Project-Modules)
 	- [Tuning the Parameters using Decay Over Episodes Technique](#Tuning-the-Parameters-using-Decay-Over-Episodes-Technique)
 	- [Implementing Grid Search](#Implementing-Grid-Search)
 
