@@ -114,14 +114,22 @@ print(f"Average penalties per episode: {AVG_penalities}")
 
 """" Output:
 Episode: 100000
-Training finished.
- alpha=  0.08320525979643727  gamma=  0.2667009922469463  epsilon=  0.3104866231676667
-Results after 100 episodes:
 Average timesteps per episode: 20.88
 Average penalties per episode: 0.0
 """"
 ```
+```python
+env_name = 'FrozenLake-v1'
+frames,AVG_timesteps, AVG_penalities = train_model(env_name, alpha_para = 0.1, gamma_para = 0.6, epsilon_para = 0.9,decay_over=True,decay_factor=.1)
+print(f"Average timesteps per episode: {AVG_timesteps}")
+print(f"Average penalties per episode: {AVG_penalities}")
 
+"""" Output:
+Episode: 100000
+Average timesteps per episode: 8.31
+Average penalties per episode: 0.0
+""""
+```
 
 ## Implementing Grid Search
 It's required to implement Grid Search to find the best combinations of hyper parameters values to get the minimum penalty and minimum steptime.
@@ -135,8 +143,8 @@ print('Average penalties per episode:', best_AVGpenalties1)
 
 
 """ Output:
-Best_parameters: {'alpha': 0.9, 'gamma': 0.9, 'epsilon': 0.3}
-Average timesteps per episode: 186.62
+Best_parameters: {'alpha': 0.6, 'gamma': 0.3, 'epsilon': 0.9}
+Average timesteps per episode: 12.43
 Average penalties per episode: 0.0
 """
 
@@ -152,8 +160,8 @@ print('Average penalties per episode:', best_AVGpenalties1)
 
 
 """ Output:
-Best_parameters: {'alpha': 0.6, 'gamma': 0.3, 'epsilon': 0.9}
-Average timesteps per episode: 5.71
+Best_parameters: {'alpha': 0.9, 'gamma': 0.9, 'epsilon': 0.9}
+Average timesteps per episode: 5.1
 Average penalties per episode: 0.0
 """
 
